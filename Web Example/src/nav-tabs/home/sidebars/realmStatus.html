@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}
+		
+		/**********\
+		Realm Status
+		Styles
+		\**********/
+		.realmName {
+			color: #CACAD9; 
+		}
+		.realmOnline {
+			color: green; 
+		}
+		.realmOffline {
+			color: red; 
+		}
+		.populationNone {
+			color: red; 
+		}
+		.populationLow {
+			color: green; 
+		}
+		.populationMedium {
+			color: yellow; 
+		}
+		.populationHigh {
+			color: orange; 
+		}
+	</style>
+</head>
+
+<body>
+	<div class="realmStatus" id="anvilmarStatus">
+	</div><!--Anvilmar Status-->
+	
+	<hr>
+	
+	<div class="realmStatus" id="undermineStatus">
+	</div><!--Undermine Status--> 
+
+	<!-- Scripts --> 
+	<script type="text/javascript">
+		function capitalize(string){
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+		
+		$.ajax({ 
+			url: "http://us.battle.net/api/wow/realm/status?jsonp=?",
+			type: 'GET',
+			dataType: 'jsonp',
+			timeout: 3000,
+			success: function(data) {
+				$.each(data.realms, function (i, realm) {
+					if (realm.name != "Anvilmar" && realm.name != "Undermine") return; 
+					
+					var status = (realm.status ? "Online" : "Offline"); 
+					var statusHTML = "<h4 class='realm" + status + "'>" + status + "</h4>";
+					
+					var population = (realm.population == "n/a" ? "None" : capitalize(realm.population)); 
+					statusHTML += "<h4 class='population" + population + "'>" + population + "</h4>"; 
+					
+					if (realm.name == "Anvilmar") {
+						statusHTML = "<h2 class='realmName'>Anvilmar</h2>" + statusHTML;
+						$("#anvilmarStatus").html(statusHTML);
+					} else if (realm.name == "Undermine") {
+						statusHTML = "<h2 class='realmName'>Undermine</h2>" + statusHTML;
+						$("#undermineStatus").html(statusHTML);
+					}
+				}); 
+			}, 
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log(textStatus); 
+			}
+		});
+	</script>
+</body>
+</html>

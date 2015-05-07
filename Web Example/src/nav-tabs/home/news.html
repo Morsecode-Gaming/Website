@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}
+		
+		/**********\
+		News Item Styles
+		\**********/
+		.newsItem {
+			text-align: center;
+			border: 12px ridge #666;
+			background: #888;
+			margin: 15px;
+		}
+		.newsItem h1 {
+			padding: 5px;
+		}
+		.newsItem p {
+			padding: 0 5px 5px 5px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="newsThread">
+	</div><!--News Thread--> 
+	
+	<!-- Scripts --> 
+	<script type="text/javascript">
+		/* ----- News Item Processing ----- */
+		// Processes image JSON into <img>  
+		// Parameters:
+		// 		image: JSON object for image with required fields (source) and optional (height, width, link)
+		// returns: HTML string for image 
+		function processImage (image) {
+			var imageHTML = "<img";
+			
+			// Set the source
+			imageHTML += " src='" + image.source + "'";
+						
+			// Set height and width if they are pre-defined
+			imageHTML += " style='" + (image.width ? "width:" + image.width + "px;" : "") + (image.height ? "height:" + image.height + "px;" : "") + "'";
+						
+			// Set link if one is provided 
+			if (image.link) {
+				imageHTML = "<a href='" + image.link + "'>" + imageHTML + " /></a>"; 
+			} else {
+				imageHTML += " />"; 
+			}
+			
+			return imageHTML; 
+		}
+		
+		// Processes news item JSON into <div>
+		// Paramters:
+		//		item: JSON object for news item with optional fields (title, image, text)
+		// returns: HTML string for news item 
+		function processNewsItem (item) {
+			var itemHTML = "<div class='newsItem'>";
+			
+			// Sets news title if one is provided
+			if (item.title) itemHTML += "<h1>" + item.title + "</h1>"; 
+			
+			// Adds news image if one is provided
+			if (item.image) itemHTML += processImage(item.image);
+			
+			// Adds news text if it is provided 
+			if (item.text) itemHTML += "<p>" + item.text + "</p>"; 
+			itemHTML += "</div>"; 
+
+			return itemHTML; 
+		}
+	
+		/* ----- Setup News Section ----- */
+		// Retrieves news JSON and populates news thread
+		$.getJSON('json/news.json', function (data) {
+			var bodyHTML = ""; 
+			$.each(data.news, function (i, item) {
+				bodyHTML += processNewsItem(item); 
+			});
+			$("#newsThread").html(bodyHTML); 
+		});
+	</script>
+</body>
+</html>

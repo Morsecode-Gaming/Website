@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<title>Guild Roster</title>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style>
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}		
+		html, body {
+			height: 100%; 
+			width: 100%;
+		}
+		
+		/**********\
+		Home Page Styles
+		\**********/
+		#homePage {
+		}
+		
+		/**********\
+		Sidebar Styles
+		\**********/
+		.sidebar {
+			position: absolute; 
+			top: 0;
+			width: 20%;
+			text-align: center;
+			overflow: hidden;
+		}
+		.sidebar .widget {
+			background: url(../res/home/sidebar_background.jpg) repeat; 
+			height: auto;
+			border: 3px ridge #53a;
+			margin: 8px; 
+			padding: 3px 0px; 
+		}
+		.sidebar li {
+			font-size: 16px; 
+			color: #999; 
+			list-style: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		.sidebar li:hover {
+			color: #666; 
+		    cursor: pointer;
+		}
+		.sidebar hr {
+			width: 80%;
+			padding: auto;
+			margin: 10px auto;
+		}
+		
+		/**********\
+		Left Sidebar
+		\**********/
+		#leftBar { 
+			left: 0;
+		}
+		
+		/**********\
+		Right Sidebar
+		\**********/
+		#rightBar {
+			left: 60%;
+		}
+		
+		/**********\
+		Center Content
+		Styles
+		\**********/
+		#homeContent {
+			position: relative;
+			left: 20%;
+			width: 60%;
+			overflow-y: auto;
+			background: url(../res/home/main_background.jpg) repeat;
+			border-bottom: solid 3px #aaa;				
+		}
+	</style>
+</head>
+<body>
+	<div id="homePage">
+		<div class="sidebar" id="leftBar">		
+			<div class="widget" id="progressDiv">
+			</div><!--Progress-->	
+			
+			<div class="widget" id="recruitmentDiv">
+			</div><!--Recruitment-->
+		</div><!--Sidebar-->
+
+		<div id="homeContent">
+			<div id="newsDiv">
+			</div><!--News-->
+		</div><!--Content-->
+	 
+		<div class="sidebar" id="rightBar">
+			<div class="widget" id="realmStatusDiv">
+			</div><!--Realm Status--> 
+		
+			<div class="widget" id="ventDiv">
+			</div><!--Vent-->	
+			
+			<div class="widget" id="shoutboxDiv">
+			</div><!--Shoutbox-->
+		</div><!--Sidebar-->
+	</div><!--Home Page-->
+	
+	<script type="text/javascript">	
+		/* ----- Side Bar Set-up Methods ----- */
+		// Dynamically sets the position of the right sidebar depending on whether the scroll bar is active or not
+		function setRightSidebarPosition() {
+			if ($("#main").height() > $("#homeContent").height()) {
+				$("#rightBar").css({left: $("body").width()*0.79});
+			} else {
+				$("#rightBar").css({left: $("body").width()*0.80});
+			}
+		}
+		
+		// Sets sidebar tops to the top of the content div 
+		function setSidebarTops() {
+			$(".sidebar").css({top: $("#homeContent").position().top});
+		}
+		
+		// Load news feed 
+		$("#newsDiv").load('nav-tabs/home/news.html', function() {});		 
+		
+		// Load left sidebar content
+		$("#progressDiv").load('nav-tabs/home/sidebars/progress.html', function() {});		
+		$("#recruitmentDiv").load('nav-tabs/home/sidebars/recruitment.html', function() {});		
+		
+		// Load right sidebar content
+		$("#realmStatusDiv").load('nav-tabs/home/sidebars/realmStatus.html', function() {});		
+		$("#ventDiv").load('nav-tabs/home/sidebars/ventrilo.html', function() {});		
+		$("#shoutboxDiv").load('nav-tabs/home/sidebars/shoutbox.html', function() {}	);		
+				
+		// Initial set-up on document load		
+		$(document).ready(function() {
+			setSidebarTops();
+			setRightSidebarPosition();
+		});
+		
+	</script>	
+</body>
+</html>

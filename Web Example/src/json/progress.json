@@ -1,0 +1,195 @@
+{
+	"tier": 17,
+	"difficulties": [{
+		"name": "normal",
+		"progress": 14,
+		"bosses": 14,
+		"raids": [{
+			"name": "Siege of Orgrimmar",
+			"bosses": [{
+				"name": "Immerseus",
+				"killed": true
+			},
+			{
+				"name": "The Fallen Protectors",
+				"killed": true
+			},
+			{
+				"name": "Norushen",
+				"killed": true
+			},
+			{
+				"name": "Sha of Pride",
+				"killed": true
+			},
+			{
+				"name": "Galakras",
+				"killed": true
+			},
+			{
+				"name": "Iron Juggernaut",
+				"killed": true
+			},
+			{
+				"name": "Kor'kron Dark Shaman",
+				"killed": true
+			},
+			{
+				"name": "General Nazgrim",
+				"killed": true
+			},
+			{
+				"name": "Malkorok",
+				"killed": true
+			},
+			{
+				"name": "Spoils of Pandaria",
+				"killed": true
+			},
+			{
+				"name": "Thok the Bloodthirsty",
+				"killed": true
+			},
+			{
+				"name": "Siegecrafter Blackfuse",
+				"killed": true
+			},
+			{
+				"name": "Paragons of the Klaxxi",
+				"killed": true
+			},
+			{
+				"name": "Garrosh Hellscream",
+				"killed": true
+			}]
+		}]
+	},
+	{
+		"name": "heroic",
+		"progress": 14,
+		"bosses": 14,
+		"raids": [{
+			"name": "Siege of Orgrimmar",
+			"bosses": [{
+				"name": "Immerseus",
+				"killed": true
+			},
+			{
+				"name": "The Fallen Protectors",
+				"killed": true
+			},
+			{
+				"name": "Norushen",
+				"killed": true
+			},
+			{
+				"name": "Sha of Pride",
+				"killed": true
+			},
+			{
+				"name": "Galakras",
+				"killed": true
+			},
+			{
+				"name": "Iron Juggernaut",
+				"killed": true
+			},
+			{
+				"name": "Kor'kron Dark Shaman",
+				"killed": true
+			},
+			{
+				"name": "General Nazgrim",
+				"killed": true
+			},
+			{
+				"name": "Malkorok",
+				"killed": true
+			},
+			{
+				"name": "Spoils of Pandaria",
+				"killed": true
+			},
+			{
+				"name": "Thok the Bloodthirsty",
+				"killed": true
+			},
+			{
+				"name": "Siegecrafter Blackfuse",
+				"killed": true
+			},
+			{
+				"name": "Paragons of the Klaxxi",
+				"killed": true
+			},
+			{
+				"name": "Garrosh Hellscream",
+				"killed": true
+			}]
+		}]
+	},
+	{
+		"name": "mythic",
+		"progress": 14,
+		"bosses": 14,
+		"raids": [{
+			"name": "Siege of Orgrimmar",
+			"bosses": [{
+				"name": "Immerseus",
+				"killed": true
+			},
+			{
+				"name": "The Fallen Protectors",
+				"killed": true
+			},
+			{
+				"name": "Norushen",
+				"killed": true
+			},
+			{
+				"name": "Sha of Pride",
+				"killed": true
+			},
+			{
+				"name": "Galakras",
+				"killed": true
+			},
+			{
+				"name": "Iron Juggernaut",
+				"killed": true
+			},
+			{
+				"name": "Kor'kron Dark Shaman",
+				"killed": true
+			},
+			{
+				"name": "General Nazgrim",
+				"killed": true
+			},
+			{
+				"name": "Malkorok",
+				"killed": true
+			},
+			{
+				"name": "Spoils of Pandaria",
+				"killed": true
+			},
+			{
+				"name": "Thok the Bloodthirsty",
+				"killed": true
+			},
+			{
+				"name": "Siegecrafter Blackfuse",
+				"killed": true
+			},
+			{
+				"name": "Paragons of the Klaxxi",
+				"killed": true
+			},
+			{
+				"name": "Garrosh Hellscream",
+				"killed": true
+			}]
+		}]
+	}]
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<title>Guild Roster</title>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}	
+		
+		/**********\
+		Progress Summary
+		Styles
+		\**********/
+		#progressSummary {
+			height: 100%;
+			color: #ddf;
+			text-align: center; 
+		}
+		#progressSummary h1 {
+			margin: 5px 0 0 0;
+		}
+		
+		/**********\
+		Tooltip Styles
+		\**********/
+		.progressionTooltip {
+			background-image: none; 
+			background-color: rgba(30,30,30,0.8);
+		}		
+		.progressDetails h3 {
+			color: #aaa;
+		}
+		.progressDetails ul {
+			list-style: none;
+			text-align: center;
+		}
+		.bossKilled {
+			color: red;
+			text-decoration: line-through;			
+		}
+		.bossNotKilled {
+			color: green; 
+		}
+	</style>
+</head>
+
+<body>
+	<div id="progressSummary">
+		<h1>Raid Progress</h1>
+		<hr/>
+		<div id="raidProgress">
+		</div><!--Raid Progress--> 
+		<hr/>
+		
+		<!--WoW Progress Guild Banner--> 
+		<a href="http://wowprogress.com/"><img alt="WoW Guild Rankings" src="http://wowprogress.com/guild_img/543288/out/type.site" border="0"/></a>
+	</div>
+
+	<!-- Scripts --> 
+	<script type="text/javascript">
+		/* ----- Variables -----*/
+		var currentTier; 
+	
+		/* ----- Util Functions ----- */
+		// Capitalizes the first letter in the string
+		// Parameters:
+		//		string: string to be capitalized 
+		// Returns: capitalized string 
+		function capitalize (string) {
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		}
+	
+		/* ----- Updating Guild Progression ----- */ 
+	
+		/* ----- Display Guild Progression ----- */
+		// Parse progression information for a difficulty from JSON data and add
+		// summary and details tooltip to the page 
+		// Parameters: 
+		//		difficultyData: JSON object for progression difficulty containing required fields (name, progress, bosses and raids) 
+		function displayDifficultyProgression (difficultyData) {
+			var difficulty = difficultyData.name; 
+
+			// Create progression summary (displayed in sidebar) for this difficulty and add it to page HTML
+			var progressHTML = "<p class='progress " + difficulty + "'>T" + currentTier + " " + capitalize(difficulty) + ": " + difficultyData.progress + "/" + difficultyData.bosses + "</p>"; 
+			$("#raidProgress").append(progressHTML);
+			
+			// Set color of the progression summary for this difficulty based on progression
+			// Green if fully cleared
+			// Orange if in progress
+			// Red if the difficulty has not yet been started
+			var progressColor = (difficultyData.progress == difficultyData.bosses ? "green" : (difficultyData.progress == 0 ? "red" : "orange")); 
+			$(".progress." + difficulty).css("color", progressColor); 
+	
+			// Sets mouseover behaviour for the progression summary
+			$(".progress." + difficulty).mouseover(function() {
+				$(this).css({
+					"color": "dark"+progressColor,
+					"cursor":"pointer"
+				});
+			}).mouseout(function() {
+				$(this).css("color", progressColor);
+			});
+
+			// Creates and sets the tooltip showing progression details
+			// for each difficulty when hovering over the progression summary
+			var tooltipHTML = "<div class='progressDetails'>";	
+			$.each(difficultyData.raids, function (i, raid) {
+				tooltipHTML += "<h3>" + raid.name + "</h3><ul>";
+				$.each(raid.bosses, function (j, boss) {	
+					var liClass = (boss.killed ? "bossKilled" : "bossNotKilled"); 
+					tooltipHTML += "<li class='" + liClass + "'>" + boss.name + "</li>"; 
+				});
+				tooltipHTML+="</ul>"; 
+			});
+			tooltipHTML += "</div>";	
+			
+			try {
+				$(".progress." + difficulty).tooltip({
+					content: tooltipHTML,
+					items: ".progress." + difficulty,
+					tooltipClass: "progressionTooltip",
+					show: {
+						effect: "slideDown",
+						duration: 100
+					},
+					hide: {
+						effect: "fadeOut",
+						duration: 50
+					},
+					position: {
+						my: "center top",
+						at: "center bottom+10"
+					}
+				}); 
+			} catch (e) {
+				console.log("Error: JqueryUI did not load in time.");
+			}
+		}
+		
+		// Processes progression JSON data and displays it in the progression 
+		// sidebar widget
+		// Parameters:
+		//		progressionData: JSON object for guild progression containing required fields (tier, difficulties) 
+		function displayGuildProgression (progressionData) {
+			$.each(progressionData.difficulties, function (i, difficulty) {
+				displayDifficultyProgression(difficulty); 
+			});			
+		}
+		
+		// Get script for jQuery UI Tooltips then parses guild progression JSON and displays it
+		$.getScript("http://code.jquery.com/ui/1.11.1/jquery-ui.js").done(function(){
+			$.getJSON('json/progress.json', function (data) {
+				currentTier = data.tier; 
+				displayGuildProgression(data); 
+			});		
+		});
+	</script>
+</body>
+</html>

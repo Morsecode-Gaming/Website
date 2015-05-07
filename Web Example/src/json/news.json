@@ -1,0 +1,28 @@
+{
+	"news": [{
+		"title": "Our Future on Draenor",
+		"image": {
+			"source": "http://media.blizzard.com/wow/warlords-of-draenor-6y1fz/media/screenshots/screenshot-2-full.jpg",
+			"link": "",
+			"height": 450,
+			"width": 700
+		},
+		"text": "The end of an era is always a chance for a new beginning, that is our motto moving into the next expansion. Considering our late start and roster difficulties in MoP we had a great tier. We killed Garrosh pre-nerf and got Mythic Garrosh pre-WoD. Moving into WoD however we plan on a few changes to push us into competitive raid progression:<ol><li>We will be revamping our raiding schedule and hosting two teams:<ul><li>Core Progression Team (T/W/Th 7:30-10:30 CST)</li><li>Secondary Team (Su/M 7:00-10:00 CST)</li></ul></li><li>Raid rules and etiquette will be more strictly enforced in WoD.</li><li>We will (hopefully) be starting organized PvP.</li><li>Guild rank overhaul.</li></ol>For a more in-depth discussion on planned WoD changes and our reasonings click <u>here</u>."
+	},
+	{
+		"title": "Warlords of Draenor and You",
+		"image": {
+			"source": "http://media.blizzard.com/wow/warlords-of-draenor-6y1fz/media/wallpapers/warlords-of-draenor-800x600.jpg",
+			"link": "http://us.battle.net/wow/en/warlords-of-draenor/"
+		},
+		"text": "Warlords of Draenor is fast approaching and it is expected that everyone (especially if you plan on raiding with us next expansion!) is prepared for it. The officers will be geared and ready to start raiding as soon as raids come out on December 2nd and will be starting with or without you. So be ready!<br /><br />Here are some helpful links to get you up-to-speed and ready for WoD:</br><ul><li><a href='http://us.battle.net/wow/en/blog/16549669/603-patch-notes-10-27-2014'>Official Blizzard 6.0.3 &quot;Pre-WoD&quot; Patch Notes</a></li><li><a href='http://www.wowhead.com/news=238316/wowhead-guides-on-warlords-of-draenor-class-changes'>Wowhead's Warlords of Draenor Class Change Guides</a></li><li><a href='http://www.icy-veins.com/forums/topic/7265-60-class-transition-guides/'>Icy Veins' 6.0 Class Transition Guides</a></li><li><a href='http://wow.joystiq.com/warlords-of-draenor/'>Joystiq's Warlords of Draenor Guide</a></li></ul><br />As always if you have questions, comments or concerns feel free to contact Morzann (AKA Brent) in-game or out-of-game."
+	},
+	{
+		"title": "Mythic Garrosh Down!",
+		"image": {
+			"source": "https://fbcdn-sphotos-h-a.akamaihd.net/hphotos-ak-xpa1/v/t1.0-9/s720x720/1521702_10154716835890386_8421134263578430619_n.jpg?oh=8a89ea1f86e8dd956925d0fe5a40a2a1&oe=54EAC80F&__gda__=1428052170_d878fd79d8bee83b4f76f0e2c5bf76c9",
+			"link": "https://facebook.com/photo.php?fbid=10154716835890386&id=561570385&set=a.10153518138400386.1073741827.561570385&source=48&refid=17&ref=bookmark&_ft_&__tn__=E"
+		},
+		"text": "It took 4 hours and 18 attempts but we finally got him down! Officially 14/14M now while the content was still current (if incredibly nerfed, but we'll leave the specifics out of it). Good job everyone and congratulations to <b>Saphstar-Icecrown</b> and <b>Kimjungun-Icecrown</b> on their Iron Juggernauts. Thanks as well to everyone from Fierce Creatures and the Icecrown/Malygos server for helping out. I look forward to more progression raiding in WoD."
+	}]
+}

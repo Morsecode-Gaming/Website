@@ -1,0 +1,56 @@
+{
+	"questions": [{
+		"title": "Realm", 
+		"question": null,
+		"type": "dropdown",
+		"answers": [
+			"Anvilmar",
+			"Undermind" 
+		]
+	},
+	{
+		"title": "Class", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	}, 
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	},
+	{
+		"title": "", 
+		"question": "",
+		"type": ""
+	}]
+}

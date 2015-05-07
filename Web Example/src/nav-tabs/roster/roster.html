@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+<title>Guild Roster</title>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}		
+		table, th, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+		}
+		th,td {
+			padding: 5px;
+			text-align: center;
+		}
+		hr {
+			width: 80%;
+			padding: auto;
+			margin: 5px auto 10px auto;
+		}
+		h1 {
+			text-align: center;
+		}
+		
+		/**********\
+		Roster Header
+		\**********/
+		#rosterHeader {
+			text-align: center;
+		}
+		
+		/**********\
+		Roster Styles
+		\**********/
+		#rosterTable th {
+			background-color: #555;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		
+		/**********\
+		Table Header
+		Styles
+		\**********/
+		.sortHeader {
+			background-color: #555;
+		}
+		.sortHeader:hover {
+			color: #0ff; 
+		    cursor: pointer;
+		}
+				
+		/**********\
+		Table Cell Styles
+		\**********/
+		.rosterCell:hover {
+			color: #0ff; 
+		    cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Roster Title -->
+	<div id="rosterHeader">
+		<h1>Guild Roster</h1>
+		<button id="updateRosterButton">Update!</button>
+	</div><!--Roster Header-->
+	<hr />
+	<!-- Roster Table Div --> 
+	<div id="roster">
+		<!-- Roster Table --> 
+		<table id="rosterTable" width="100%">
+			<!-- Sortable Headers --> 
+			<thead id="rosterHead">
+				<th class="sortHeader">Rank</th>
+				<th class="sortHeader">Name</th>
+				<th class="sortHeader">Level</th>
+				<th class="sortHeader">Race</th>
+				<th class="sortHeader">Class</th>
+				<th class="sortHeader">Spec</th>
+				<th class="sortHeader">Achievement Points</th> 
+				<th class="sortHeader">Realm</th>
+			</thead>
+			<!-- Roster Body --> 
+			<tbody id="rosterBody">
+			</tbody>
+		</table>
+	</div>
+ 
+	<!-- Scripts --> 
+	<script type="text/javascript">	
+		/* ----- VARIABLES ----- */
+		// Booleans
+		var gotClasses = false;
+		var gotRaces = false; 
+		// Sorting
+		var DirectionEnum = { 
+			ASCENDING : false,	
+			DESCENDING : true
+		}
+		var sortIndex = 0; 
+		var sortDirection = DirectionEnum.ASCENDING;  
+		// Maps
+		var classList = [];
+		var raceList = []; 
+		var rankList = ["King", "Queen", "Officer", "Veteran Raider", "Veteran", "Raider", "Guildie", "Raider Recruit", "Recruit", "THE BOX"]; 
+		// Arrays
+		var guildData = []; 
+		
+		/* ----- SORTING ALGORITHMS ----- */
+		// One-dimensional Array Quick Sort Algorithm 
+		// Parameters:
+		// 		a: non-empty array
+		// Returns: Sorted array
+		function qsort(a) {
+			if (a.length == 0) return [];
+		 
+			var left = [], right = [], pivot = a[0];
+			for (i = 1; i < a.length; i++) {
+				a[i] < pivot ? left.push(a[i]) : right.push(a[i]);
+			}
+			return qsort(left).concat(pivot, qsort(right));
+		}
+		
+		// Two-dimensional Array Quick Sort Algorithm
+		// Parameters: 
+		// 		a2d: non-empty two-dimensional array
+		// 		col: array index to sort on (0..a2d[].length)
+		// 		reverse: OPTIONAL sort in reverse order
+		// Returns: Sorted two-dimensional array
+		function qsort(a2d, col, reverse) {
+			if (a2d.length == 0) return []; 
+			
+			// "optional" reverse paramter 
+			reverse = (typeof reverse === "undefined") ? false : reverse;
+			
+			var left = [], right = [], pivot = a2d[0];
+			for (var i = 1; i < a2d.length; i++) {
+				if (reverse) 
+					a2d[i][col] > pivot[col] ? left.push(a2d[i]) : right.push(a2d[i]);
+				else 
+					a2d[i][col] < pivot[col] ? left.push(a2d[i]) : right.push(a2d[i]); 
+			}
+			return qsort(left, col, reverse).concat([pivot], qsort(right, col, reverse)); 
+		}
+				
+		/* ----- TABLE METHODS ----- */
+		// Create an HTML Table Row from Character Data
+		// Parameters:
+		// 		charData: array of form [index, rank id, name, level, race id, class id, spec, achievement points, realm]
+		// Returns: HTML Table Row String
+		function addTableData(charData) {
+			var dataString = '<tr>';
+			dataString += '<td>' + rankList[charData[1]] + '</td>';
+			dataString += '<td class="rosterCell name">' + charData[2] + '</td>'; 
+			dataString += '<td>' + charData[3] + '</td>';
+			dataString += '<td>' + charData[4] + '</td>';
+			dataString += '<td>' + charData[5] + '</td>';
+			dataString += '<td class="rosterCell spec">' + charData[6] + '</td>';
+			dataString += '<td class="rosterCell achieves">' + charData[7] + '</td>';
+			dataString += '<td>' + charData[8] + '</td>';
+			dataString += '</tr>'; 
+			return dataString; 
+		}
+		
+		// Sorts table by idx column
+		// Paramters:
+		//		idx: Column Index to sort on
+		function sortTable(idx) {
+			// Clears the table 
+			$("#rosterBody").empty();
+			
+			// Sorts the data 
+			var sortedData = qsort(guildData, idx, sortDirection);
+			
+			// Re-populates the table 
+			for (var i = 0; i < sortedData.length; i++) {
+				$('#rosterTable > tbody:last').append(addTableData(sortedData[i]));
+			}
+			guildData = sortedData; 
+		}
+		
+		/* ----- ROSTER DISPLAY ----- */
+		function displayRoster() {
+			var idx = 0; 
+			$.getJSON('json/roster.json', function (roster) {
+				$.each(roster.ranks, function (i, rank) {
+					$.each(rank.members, function (j, member) {
+						// Parse JSON Data into memberData array 
+						memberData = [
+							idx++, 
+							i,
+							member.name, 
+							member.level, 
+							member.race, 
+							member.class,
+							(member.spec1 == null) ? "" : member.spec1.name,
+							member.achievementPoints,
+							member.realm
+						];
+				
+						// Push individual member's data to guild data 
+						guildData.push(memberData);				
+					});
+				});
+				
+				
+				
+				// Sort table by guild rank 
+				$("#rosterTable th:first").css('background-color', 'green');
+				sortTable(1);
+			});
+		}
+		
+		/* ----- ROSTER UPDATE ----- */
+		// Prints roster JSON for saving
+		// Parameters:
+		//		ranks: json sorted by ranks
+		function printRosterJSON (ranks) {
+			var log = '\n{"ranks": [';
+			$.each(ranks, function (i, rank) {
+				log += '{"name": "' + rankList[i] + '",';
+				log += '"members": ';
+				log += rank;
+				log += '},';
+			});
+			log = log.slice(0,-1);
+			log += ']}\n';
+			console.log(log);
+		}
+		
+		// Processes member JSON into member data 
+		// Parameters: 
+		//		idx: Member index 
+		//		member: Parsed member JSON with fields (rank, character)
+		function processMember (idx, member) {
+		}
+		
+		// Processes roster data
+		// Parameters:
+		//		members: roster JSON data
+		function processRoster (members) {
+			var ranks = ["[", "[", "[", "[", "[", "[", "[", "[", "[", "["]; 
+			$.each(members, function (i, member) {
+				var json = "{";
+				json += '"name": "' + member.character.name + '",'; 
+				json += '"realm": "' + member.character.realm + '",'; 
+				json += '"race": "' + raceList[member.character.race] + '",'; 
+				json += '"class": "' + classList[member.character.class] + '",'; 
+				json += '"level": ' + member.character.level + ','; 
+				json += '"achievementPoints": ' + member.character.achievementPoints + ''; 
+				json += '}' + ',' + '';
+				ranks[member.rank] += json; 
+			});
+			for (i = 0; i < ranks.length; i++) {
+				ranks[i] = ranks[i].slice(0,-1);
+				ranks[i] += "]"	;
+			}
+			printRosterJSON(ranks); 
+		}
+		
+		// Fetch the guild roster from WoW API to update locally stored JSON
+		function fetchRoster() {
+			$.ajax({ 
+				url: "http://us.battle.net/api/wow/guild/Anvilmar/South%20of%20Heaven?fields=members&jsonp=?",
+				type: 'GET',
+				dataType: 'jsonp',
+				timeout: 3000,
+				success: function(data) {
+					processRoster(data.members); 
+				}, 
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert("Uh oh! Our guild seems to be lost on battle.net! Please try again later."); 
+				}
+			}); 			
+		}
+		
+		// Verifies class and race maps have been loaded before getting roster.
+		function checkLoad() {
+			if (gotClasses && gotRaces) {
+				fetchRoster(); 
+			}
+		}
+		
+		// Fetches roster information from WoW API and populates the roster table
+		function updateRoster() {
+			if (gotClasses && gotRaces) {
+				fetchRoster();
+			} else { 
+				if (!gotClasses) {
+					// Fetch class map
+					$.getJSON("http://us.battle.net/api/wow/data/character/classes?jsonp=?", function (data) {
+						$.each(data.classes, function (i, item) {
+							classList[item.id] = item.name; 
+						});
+						gotClasses = true; 
+						checkLoad(); 
+					});
+				}
+
+				if (!gotRaces) {
+					// Fetch race map
+					$.getJSON("http://us.battle.net/api/wow/data/character/races?jsonp=?", function (data) {
+						$.each(data.races, function (i, item) {
+							raceList[item.id] = item.name; 
+						});
+						gotRaces = true; 
+						checkLoad(); 
+					});
+				} 
+			}
+		}
+		
+		/* ----- On Click Calls ----- */
+		// Update Button
+		// Clicking will update the roster JSON and table 
+		$("#updateRosterButton").click(function() {
+			updateRoster();
+		});
+		
+		// Headers
+		// Clicking will sort by that column in ascending order.
+		// A second click will sort by that column in descending order. 
+		$(".sortHeader").click(function() {
+			$("#rosterTable th").css('background-color', '#555');
+			idx = this.cellIndex+1; 
+			if (sortIndex == idx) 
+				sortDirection = !sortDirection; 
+			else 
+				sortDirection = DirectionEnum.ASCENDING; 
+			$(this).css('background-color', sortDirection ? 'red' : 'green');
+			sortIndex = idx; 
+			sortTable(idx);
+		});
+		
+		// Clicking on specialization column will open the member's talents
+		// in the blizzard battle.net talent calculator 
+		// Parameters: 
+		//		realm: Member's realm
+		//		name: Member's name
+		//		primary: OPTIONAL boolean value, true if primary spec, false if secondary 
+		function openTalents(realm, name, primary) {
+			// "optional" primary paramter 
+			primary = (typeof primary === "undefined") ? true : primary;
+			var spec = primary ? 0 : 1; 
+			
+			// Creates talent calculator URL and opens
+			$.getJSON("http://us.battle.net/api/wow/character/" + realm + "/" + name + "?fields=talents&jsonp=?", function (data) {
+				var url = "http://us.battle.net/wow/en/tool/talent-calculator#"; 
+				
+				// class parameter
+				url += data.calcClass; 
+				
+				//  spec parameter 
+				url += data.talents[spec].calcSpec; 
+				
+				// selected talents parameter 
+				url += "!";
+				url += data.talents[spec].calcTalent; 
+	
+				// selected glyphs parameter 
+				url += "!"; 
+				url += data.talents[spec].calcGlyph;
+				
+				// open talent calculator 
+				window.open(url, '_self');
+			});
+		}
+		
+		// Character
+		// Clicking on specific cells will open links pertinent to the specified character
+		// E.g: Info page, achievements, talent calculator, etc...
+		$(document).on("mousedown", ".rosterCell", function(e) {
+			// Do nothing on right click 
+			if (e.which == 3) return; 
+		
+			var row = $(this).parent().parent().children().index($(this).parent()); 
+			var name = guildData[row][2];
+			var realm = guildData[row][8];
+			
+			var type = $(this).attr('class').replace('rosterCell ','')
+			var url = "http://us.battle.net/wow/en/character/" + realm + "/" + name + "/";
+			
+			// Launch battle.net armory page if clicking on member name 
+			if (type == "name") { 
+				url += 'advanced';
+				
+			// Launch battle.net talent calculator if clicking on spec 
+			} else if (type == "spec") {
+				openTalents(realm, name);
+				return; 
+				
+			// Launch battle.net achievement page if clicking on achievement points 
+			} else if (type == "achieves") { 
+				url += 'achievements';
+			}
+			
+			// Launch URL 
+			window.open(url, e.which == 1 ? '_self' : '_blank');
+			
+			// Prevent middle-button click from scrolling
+			if (e.which == 2) return false; 
+		});
+		
+		/* ----- Load Functions ----- */
+		displayRoster(); 
+	</script>
+</body>
+</html>

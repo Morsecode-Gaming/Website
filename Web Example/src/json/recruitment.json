@@ -1,0 +1,128 @@
+{
+	"message": "<b>&lt;South of Heaven&gt; is always looking for new members!</b><br /><br />Raid and PVP recruitment needs can be seen below. Please apply via the \"Apply Now\" button.<br /><br />New casual or leveling members are always welcome! You can apply via the \"Apply Now\" button or contact an officer in-game.",
+	"raiding": [{
+		"name": "Death Knight",
+		"roles": [{
+			"name": "Tank",
+			"recruiting": false
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": "high"
+		}]
+	},
+	{
+		"name": "Druid",
+		"roles": [{
+			"name": "Tank",
+			"recruiting": false
+		},
+		{
+			"name": "Healer",
+			"recruiting": "low"
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": "low"
+		},
+		{
+			"name": "Ranged DPS",
+			"recruiting": "high"
+		}]
+	},
+	{
+		"name": "Hunter",
+		"roles": [{
+			"name": "Ranged DPS",
+			"recruiting": "high"
+		}]
+	},
+	{
+		"name": "Mage",
+		"roles": [{
+			"name": "Ranged DPS",
+			"recruiting": "low"
+		}]
+	},
+	{
+		"name": "Monk",
+		"roles": [{
+			"name": "Tank",
+			"recruiting": false
+		},
+		{
+			"name": "Healer",
+			"recruiting": "low"
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": false
+		}]
+	},
+	{
+		"name": "Paladin",
+		"roles": [{
+			"name": "Tank",
+			"recruiting": false
+		},
+		{
+			"name": "Healer",
+			"recruiting": "low"
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": true
+		}]
+	},
+	{
+		"name": "Priest",
+		"roles": [{
+			"name": "Healer",
+			"recruiting": "low"
+		},
+		{
+			"name": "Ranged DPS",
+			"recruiting": "high"
+		}]
+	},
+	{
+		"name": "Rogue",
+		"roles": [{
+			"name": "Melee DPS",
+			"recruiting": "low"
+		}]
+	},
+	{
+		"name": "Shaman",
+		"roles": [{
+			"name": "Healer",
+			"recruiting": true
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": "high"
+		},
+		{
+			"name": "Ranged DPS",
+			"recruiting": "high"
+		}]
+	},
+	{
+		"name": "Warlock",
+		"roles": [{
+			"name": "Ranged DPS",
+			"recruiting": true
+		}]
+	},
+	{
+		"name": "Warrior",
+		"roles": [{
+			"name": "Tank",
+			"recruiting": false
+		},
+		{
+			"name": "Melee DPS",
+			"recruiting": "low"
+		}]
+	}]
+}

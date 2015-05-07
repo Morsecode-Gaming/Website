@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}
+		
+		/**********\
+		Guild Application
+		Styles
+		\**********/
+		#applyButton {
+			width: 80%;
+			height: 30px;
+			margin: 5px 5px 8px 5px; 
+		}
+		
+		/**********\
+		Recruitment List
+		Styles
+		\**********/
+		#recruitment {
+			color: #ddf; 
+		}		
+		#recruitment h2:hover {
+			color: #bbb;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		#classRecruitment {
+			margin: 5px 0 0 0; 
+		}		
+		.recruitmentClass {
+			margin: 0 0 10px 0;
+		}
+		.recruitmentContainer {
+			margin: 0 0 8px 0;
+		}
+		
+		/**********\
+		Apply Button
+		Styles
+		\**********/
+		#applyButton {
+			width: 30%;
+			height: 20px;			
+			background-color: #2e466e;
+			background: linear-gradient(to bottom, #2e466e 5%, #415989 100%);						
+			border-radius: 20px;
+			border: 1px solid #1f2f47;
+			box-shadow: 0px 0px 10px 3px #23395e;
+
+			display: inline-block;
+			cursor: pointer;
+			color: #BBF;
+			font-size: 18px;
+			text-decoration: none; 
+			padding: 10px 30px;
+			text-shadow: 0px 1px 6px #263666;
+		}
+		#applyButton:hover {
+			background:linear-gradient(to bottom, #415989 5%, #2e466e 100%);
+			background-color:#415989;
+		}
+
+		/**********\
+		Recruitment Tooltip
+		Styles
+		\**********/
+		.recruiting {
+			color: orange;
+		}
+		.recruitingHigh {
+			color: green;
+		}
+		.recruitingLow {
+			color: yellow;
+		}
+		.notRecruiting {
+			color: red; 
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Recruitment Sidebar Content --> 
+	<div id="recruitment">
+		<!-- Sidebar Title --> 
+		<h1>Recruitment</h1>
+		<hr />
+		
+		<!-- Guild recruitment message/advert --> 
+		<p id="recruitmentMessage"></p> 
+		<hr />
+		
+		<!-- Application Button --> 
+		<a href="#" id="applyButton">Apply Now</a>
+		<hr />
+		
+		<!-- List of recruitment openings for raid team --> 
+		<h2 class="recruitmentTitle" id="raidRecruitmentTitle">Raid Recruitment</h2>
+		<div class="recruitmentList" id="raidRecruitment" hidden>
+		</div><!--Raid Recruitment-->
+		<hr />
+		
+		<!-- List of recruitment openings for pvp team --> 
+		<div class="recruitmentContainer">
+			<h2 class="recruitmentTitle" id="pvpRecruitmentTitle">PvP Recruitment</h2>
+			<div class="recruitmentList" id="pvpRecruitment" hidden>
+			</div><!--PVP Recruitment-->
+		</div><!--Container-->
+	</div><!--Recruitment-->
+	
+	<!-- Scripts --> 
+	<script type="text/javascript">		
+		/* ----- Guild Application */
+		// Opens up the guild application form 		
+		$('#applyButton').click(function() {
+			loadPage('application/applicationForm.html', false);
+			return false; 
+		});
+
+		/* ----- On Click ----- */
+		// Toggles recruitment on click 
+		$(".recruitmentTitle").click(function() {
+			$("#" + this.id.replace("Title","")).slideToggle(500, function () {});
+		});
+		
+		/* ----- Recruitment Parsing ----- */
+		// Processes class JSON for that classes recruitment 
+		// Paramters: 
+		//		_class: processed class HTML with required fields (name, recruiting) 
+		// returns: HTML string for class' recruitment
+		function processClass (_class) {
+			var classHTML = "<div class='recruitmentClass'>";
+	
+			// Set class' name
+			classHTML += "<h3>" + _class.name + "</h3>";
+			
+			// Processes and sets which roles are currently
+			// being recruited for that class
+			var innerHtml = "";
+			$.each(_class.roles, function (j, role) {
+				if (role.recruiting) { 
+					innerHtml += "<p class='recruiting" + (role.recruiting == "high" ? "High" : (role.recruiting == "low" ? "Low" : "")) + "'>" + role.name + "</p>";
+				}
+			});
+			
+			// Displays recruitment or indicates we are not recruiting for this specific class 
+			classHTML += (innerHtml.length == 0 ? "<p class='notRecruiting'>Not currently recruiting.</p>" : innerHtml) + "</div>";
+			
+			return classHTML; 
+		}
+		
+		// Parse JSON recruitment file into HTML
+		$.getJSON('json/recruitment.json', function (data) {
+			var recruitmentHTML = ""; 
+			$("#recruitmentMessage").html(data.message);
+			$.each(data.raiding, function (i, _class) {
+				recruitmentHTML += processClass(_class); 
+			});
+			$("#raidRecruitment").append(recruitmentHTML); 
+		});
+	</script>
+</body>
+</html>

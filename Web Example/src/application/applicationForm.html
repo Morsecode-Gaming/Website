@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Script Setup -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	
+	<!-- CSS Styles -->
+	<style> 
+		/**********\
+		Generic Styles
+		\**********/
+		html, body, * {
+			padding: 0;
+			margin: 0;
+		}
+		
+		/**********\
+		General Form
+		Styles
+		\**********/
+		#guildApplication {
+			padding: 0 10px;
+		}
+		#guildApplication hr {
+			width: 80%;
+			margin: auto;
+		}
+		
+		/**********\
+		Title Styles
+		\**********/
+		#guildApplication h1 {
+			text-align: center; 
+			margin: 0 0 5px 0;
+		}
+		
+		/**********\
+		Question Styles
+		\**********/
+		#applicationQuestions {
+			width: 75%;
+			margin: 10px auto;	
+			padding: 5px 10px 10px 10px;
+			border: 2px solid #555;
+			text-align: center; 
+		}
+		#applicationQuestions form {
+		}
+		#applicationQuestions fieldset {
+			display: table; 
+			padding: 10px 5px 5px 5px;
+			margin: 10px 0;
+			text-align: left;
+		}
+		#interestQuestions fieldset {
+			margin: 5px 0;
+		}
+		#applicationQuestions legend {
+			font-size: 24px;
+			font-weight: bold; 
+			text-decoration: underline;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+		#applicationQuestions legend:hover {
+			cursor: pointer;
+		}
+		#applicationQuestions p {
+			display: table-row;
+		}
+		#applicationQuestions label {
+			margin: 0 10px 0 5px; 
+		}
+		.questionInfo {
+			display: table-cell; 
+		}
+		.questionLabel {
+			font-weight: bold;
+			display: table-cell; 
+		}
+		.selectionLabel {
+			margin: 0 10px 0 5px; 
+		}
+		#applicationQuestions input {
+			display: table-cell;
+			margin: 0 0 0 10px; 
+		}
+		#applicationQuestions select {
+			display: table-cell; 
+			margin: 0 0 0 10px;
+		}
+		#applicationQuestions textarea {
+			display: table-cell;
+			margin: 3px; 0 0 10px; 
+		}
+		#applicationQuestions .nextButton {
+			margin: 5px 0 0 0;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="guildApplication">
+		<h1>Guild Application</h1>
+		<hr />
+		
+		<div id="applicationQuestions"> 
+			<form> 
+				<!-- ******************* -->
+				<!-- CHARACTER QUESTIONS -->
+				<!-- ******************* -->
+				<fieldset id="characterQuestions">
+					<legend>Character Questions</legend>
+
+					<!-- Character Name -->
+					<p>
+						<label class="questionLabel">Name:</label>
+						<input type="text" name="characterName" />
+					</p> 
+					
+					<!-- Character Realm -->
+					<p>
+						<label class="questionLabel">Realm:</label>
+						<input type="text" name="characterRealm" />
+					</p>
+						
+					<!-- Character Class -->
+					<p>
+						<label class="questionLabel">Class:</label> 
+						<select name="characterClass">
+							<option value="dk">Death Knight</option>
+							<option value="druid">Druid</option>
+							<option value="hunter">Hunter</option>
+							<option value="mage">Mage</option>
+							<option value="monk">Monk</option>
+							<option value="paladin">Paladin</option>
+							<option value="priest">Priest</option>
+							<option value="rogue">Rogue</option>
+							<option value="shaman">Shaman</option>
+							<option value="warlock">Warlock</option>
+							<option value="warrior">Warrior	</option>
+						</select>
+					</p>
+					
+					<!-- Character Level -->
+					<p>
+						<label class="questionLabel">Level:</label>
+						<input type="number" min="1" max="100" name="characterLevel" />
+					</p>
+				</fieldset>
+				
+				<!-- ***************** -->
+				<!-- GENERAL QUESTIONS -->
+				<!-- ***************** -->
+				<fieldset id="generalQuestions">
+					<legend>General Questions</legend> 
+
+					<!-- Play style/frequency -->
+					<p> 
+						<label class="questionLabel">How often do you play WoW?</label>
+						<input type="radio" name="playFrequency" value="monthly" /><label class="selectionLabel">A few times a month.</label>
+						<input type="radio" name="playFrequency" value="weekly" /><label class="selectionLabel">A few times a week.</label>
+						<input type="radio" name="playFrequency" value="daily" /><label class="selectionLabel">0-2 hours a day.</label>
+						<input type="radio" name="playFrequency" value="hourly" /><label class="selectionLabel">2-5 hours a day.</label>
+						<input type="radio" name="playFrequency" value="all" /><label class="selectionLabel">5+ hours a day.</label> 	
+					</p>
+					
+					<!-- Play times --> 
+					<p>
+						<label class="questionLabel">When do you usually play?</label>
+						<input type="checkbox" name="playTime" value="weekday" /><label class="selectionLabel">Weekdays</label>
+						<input type="checkbox" name="playTime" value="weekend" /><label class="selectionLabel">Weekends</label>
+						<input type="checkbox" name="playTime" value="day" /><label class="selectionLabel">Daytime</label>
+						<input type="checkbox" name="playTime" value="evening" /><label class="selectionLabel">Evenings</label>
+					</p>
+					
+					<!-- How long have they been playing -->
+					<p>
+						<label class="questionLabel">How long have you been playing?</label>
+						<input type="radio" name="playingSince" value="launch" /><label class="selectionLabel">Since Launch</label>
+						<input type="radio" name="playingSince" value="vanilla" /><label class="selectionLabel">Since Vanilla</label>
+						<input type="radio" name="playingSince" value="bc" /><label class="selectionLabel">Since BC</label>
+						<input type="radio" name="playingSince" value="wrath" /><label class="selectionLabel">Since Wrath</label>
+						<input type="radio" name="playingSince" value="cata" /><label class="selectionLabel">Since Cata</label>
+						<input type="radio" name="playingSince" value="mop" /><label class="selectionLabel">Since MoP</label>
+						<input type="radio" name="playingSince" value="wod" /><label class="selectionLabel">Started in WoD</label>
+					</p>
+					
+					<br />
+					
+					<!-- Previous Guild Questions -->
+					<p>
+						<label class="questionLabel">Were you previously in a guild?</label>
+						<input type="radio" name="previousGuild" value="yes" /><label class="selectionLabel">Yes</label>
+						<input type="radio" name="previousGuild" value="no" /><label class="selectionLabel">No</label>
+					</p>
+					<!-- In a previous guild -->
+					<div id="previousGuildInfo">
+						<!-- Previous guild name -->
+						<p>
+							<label class="questionInfo">Guild Name:</label>
+							<input type="text" name="previousGuildName" />
+						</p>
+						<!-- Previous guild rank --> 
+						<p>
+							<label class="questionInfo">Guild Role or Rank:</label>
+							<input type="text" name="previousGuildRank" />
+						</p>
+						<!-- Time in guild --> 
+						<p>
+							<label class="questionInfo">How long were you in guild?</label>
+							<input type="radio" name="previousGuildTime" value="days" /><label class="selectionLabel">A few days.</label>
+							<input type="radio" name="previousGuildTime" value="weeks" /><label class="selectionLabel">A few weeks.</label>
+							<input type="radio" name="previousGuildTime" value="months" /><label class="selectionLabel">A few months.</label>
+							<input type="radio" name="previousGuildTime" value="year" /><label class="selectionLabel">About a year.</label>
+							<input type="radio" name="previousGuildTime" value="years" /><label class="selectionLabel">Many years.</label>
+						</p>
+						<!-- Reason for leaving -->
+						<p><label class="questionInfo">Why did you leave?</label></p>
+						<p>
+							<textarea name="previousGuildLeaveReason" rows="3" cols="50"></textarea>
+						</p>
+					</div>
+					<!-- Not in a previous guild --> 
+					<div id="noGuildInfo">
+						<p><label class="questionInfo">Why not?</label></p>
+						<p>
+							<textarea name="noGuildReason" rows="3" cols="50"></textarea>
+						</p>
+					</div>
+					
+					<br />
+					
+					<!-- In-game interests -->
+					<p>
+						<label class="questionLabel">What do you enjoy doing in-game?</label>
+						<div><input type="checkbox" name="interests" value="leveling" /><label class="selectionLabel">Leveling</label></div>
+						<div><input type="checkbox" name="interests" value="questing" /><label class="selectionLabel">Questing</label></div>
+						<div><input type="checkbox" name="interests" value="achievements" /><label class="selectionLabel">Achievements</label></div>
+						<div><input type="checkbox" name="interests" value="professions" /><label class="selectionLabel">Professions</label></div>
+						<div><input type="checkbox" name="interests" value="ah" /><label class="selectionLabel">Auction House</label></div>
+						<div><input type="checkbox" name="interests" value="transmog" /><label class="selectionLabel">Transmog</label></div>
+						<div><input type="checkbox" name="interests" value="roleplay" /><label class="selectionLabel">Roleplay</label></div>
+						<div><input type="checkbox" name="interests" value="dungeons" /><label class="selectionLabel">Dungeons</label></div>
+						<div><input type="checkbox" name="interests" value="raiding" /><label class="selectionLabel">Raiding</label></div>
+						<div><input type="checkbox" name="interests" value="battlegrounds" /><label class="selectionLabel">Battlegrounds</label></div>
+						<div><input type="checkbox" name="interests" value="wpvp" /><label class="selectionLabel">World PVP</label></div>
+						<div><input type="checkbox" name="interests" value="arena" /><label class="selectionLabel">Arena</label></div>
+						<div><input type="checkbox" name="interests" value="rbg" /><label class="selectionLabel">Rated Battlegrounds</label></div>
+						<div><input type="checkbox" name="interests" value="pokemon" /><label class="selectionLabel">Pet Battles</label></div>
+					</p>
+					
+					<br />
+					
+					<!-- What can they/we offer -->
+					<p><label class="questionLabel">What do you expect to get out of being a member of SoH?</label></p>
+					<p><textarea name="weOffer" rows="3" cols="80"></textarea></p>
+					<p><label class="questionLabel">What do you feel you can contribute to SoH?</label></p>
+					<p><textarea name="theyOffer" rows="3" cols="80"></textarea></p>
+					
+					<br />
+					
+					<!-- Where they heard about us --> 
+					<p>
+						<label class="questionLabel">How did you hear about SoH?</label> 
+						<select name="heardAbout">
+							<option value="ingame">In-game Guild Ad</option>
+							<option value="guildie">Guild Member</option>
+							<option value="blizz">Blizzard Forums or Website</option>
+							<option value="web">Other Online Website</option>
+							<option value="other">Other (please specify)</option>
+						</select>
+					</p>					
+					<p id="heardAboutExtra"> 
+						<label id="heardAboutInfoLabel" class="questionLabel"></label>
+						<input type="text" name="heardAboutInfo" />
+					</p>
+				</fieldset>
+				
+				<!-- ****************** -->
+				<!-- INTEREST QUESTIONS -->
+				<!-- ****************** -->
+				<fieldset id="interestQuestions">
+					<legend>Application Interests</legend> 
+					
+					<!-- Application Interests -->
+					<label class="questionLabel"><b>I am interested in applying for ...</b></label>
+					<input type="checkbox" name="applicationInterests" value="raiding" /><label>Raiding</label>
+					<input type="checkbox" name="applicationInterests" value="arena" /><label>Arena</label>
+					<input type="checkbox" name="applicationInterests" value="rbg" /><label>Rated Battlegrounds</label>
+					<!--<input type="checkbox" name="applicationInterests" value="officer" /><label>Officer</label>-->
+					
+					<!-- ***************** -->
+					<!-- RAIDING QUESTIONS -->
+					<!-- ***************** -->
+					<fieldset id="raidingQuestions" class="subfieldset">
+						<legend>Raiding Questions</legend>
+						
+						<!-- Raiding Class --> 
+						<p> 
+							<label class="questionLabel">Primary raider's class:</label>
+							<select name="raidClass">
+								<option value="dk">Death Knight</option>
+								<option value="druid">Druid</option>
+								<option value="hunter">Hunter</option>
+								<option value="mage">Mage</option>
+								<option value="monk">Monk</option>
+								<option value="paladin">Paladin</option>
+								<option value="priest">Priest</option>
+								<option value="rogue">Rogue</option>
+								<option value="shaman">Shaman</option>
+								<option value="warlock">Warlock</option>
+								<option value="warrior">Warrior	</option>
+							</select>
+						</p>
+						
+						<!-- Raiding Link -->
+						<p>
+							<label class="questionLabel">Link to your raider (in raid gear):</label>
+							<input type="text" name="raiderLink" />
+						</p>
+						
+						<!-- Role -->
+						<p>
+							<label class="questionLabel">Primary Role:</label>
+							<input id="tankRoleQ" type="radio" name="raidRole" value="Tank" disabled /><label class="selectionLabel" for="tankRoleQ">Tank</label>
+							<input id="healerRoleQ" type="radio" name="raidRole" value="Healer" disabled /><label class="selectionLabel" for="healerRoleQ">Healer</label>
+							<input id="rangedRoleQ" type="radio" name="raidRole" value="Ranged" disabled /><label class="selectionLabel" for="rangedRoleQ">Ranged</label>
+							<input id="meleeRoleQ" type="radio" name="raidRole" value="Melee" disabled /><label class="selectionLabel" for="meleeRoleQ">Melee</label> 
+						</p>
+						<p>
+							<label class="questionInfo">Item Level:</label>
+							<input type="number" name="roleItemLevel" disabled />
+						</p>
+						
+						<!-- Offspecs -->
+						<p>
+							<label class="questionLabel">Secondary Roles Willing to Play:</label>
+							<input id="tankOffQ" type="checkbox" name="raidOffRole" value="Tank" disabled /><label class="selectionLabel" for="tankOffQ">Tank</label>
+							<input id="healerOffQ" type="checkbox" name="raidOffRole" value="Healer" disabled /><label class="selectionLabel" for="healerOffQ">Healer</label>
+							<input id="rangedOffQ" type="checkbox" name="raidOffRole" value="Ranged" disabled /><label class="selectionLabel" for="rangedOffQ">Ranged</label>
+							<input id="meleeOffQ" type="checkbox" name="raidOffRole" value="Melee" disabled /><label class="selectionLabel" for="meleeOffQ">Melee</label>
+						</p>
+						
+						<!-- Alts -->
+						<p><label class="questionLabel">Do you have any raiding alts?</label></p>
+						<p><label class="questionInfo">If so please list them below in the format: "Class: Spec (iLevel), Offspec (iLevel)".</label></p>
+						<p><textarea name="raidAltInfo" rows="3" cols="50"></textarea></p>
+						
+						<br />
+						
+						<!-- Raiding Strength -->
+						<p><label class="questionLabel">What is your greatest strength as a raider?</label></p>
+						<p><textarea name="raidStrength" rows="3" cols="80"></textarea></p>
+						
+						<!-- Raiding Weakness -->
+						<p><label class="questionLabel">What is your greatest weakness as a raider?</label></p>
+						<p><textarea name="raidWeakness" rows="3" cols="80"></textarea></p>
+						
+						<br />
+												
+						<!-- Scheduling --> 
+						<label class="questionLabel"><b>Can you make our raid times? (All in EST)</b></label>
+						<p>
+							<label class="questionInfo">Progression Team:</label>
+							<input type="checkbox" name="progressionRaidTimes" value="thursday" /><label class="selectionLabel">Thursday 8-11pm</label>
+							<input type="checkbox" name="progressionRaidTimes" value="friday" /><label class="selectionLabel">Friday 8-12pm</label>
+							<input type="checkbox" name="progressionRaidTimes" value="monday" /><label class="selectionLabel">Monday 8-11pm</label>
+						</p>
+						<p>
+							<label class="questionInfo">Alt Team:</label>
+							<input type="checkbox" name="altRaidTimes" value="tuesday" /><label class="selectionLabel">Tuesday 8-11pm</label>
+							<input type="checkbox" name="altRaidTimes" value="wednesday" /><label class="selectionLabel">Wednesday 8-12pm</label>
+						</p>
+						
+						<br />
+						
+						<!-- Logs --> 
+						<p><label class="questionLabel"><b>Can you provide links to raid logs showcasing your raid performance?</b></label></p>
+						<p><label class="questionInfo">Please put each link on a new line.</label></p>
+						<p><label class="questionInfo">Heroic or Mythic logs will hold higher credence than RF or Normal.</label>
+						<p>
+							<textarea name="logLinks" rows="3" cols="80"></textarea>
+						</p>
+					</fieldset>
+					
+					<!-- ************* -->
+					<!-- PVP QUESTIONS -->
+					<!-- ************* -->
+					<fieldset id="pvpQuestions" class="subfieldset">
+						<legend>PvP Questions</legend>
+											
+						<!-- PVP Class -->
+						<p> 
+							<label class="questionLabel">Primary PVPer's class:</label>
+							<select name="pvpClass">
+								<option value="dk">Death Knight</option>
+								<option value="druid">Druid</option>
+								<option value="hunter">Hunter</option>
+								<option value="mage">Mage</option>
+								<option value="monk">Monk</option>
+								<option value="paladin">Paladin</option>
+								<option value="priest">Priest</option>
+								<option value="rogue">Rogue</option>
+								<option value="shaman">Shaman</option>
+								<option value="warlock">Warlock</option>
+								<option value="warrior">Warrior	</option>
+							</select>
+						</p>
+						
+						<!-- PVP Link -->
+						<p>
+							<label class="questionLabel">Link to your PVPer (in PVP gear):</label>
+							<input type="text" name="pvpLink" />
+						</p>
+						
+						<!-- PVP Spec -->
+						<p>
+							<label class="questionLabel">Primary Spec:</label>
+							<input id="spec1Q" type="radio" name="pvpSpec" value="spec1" disabled /><label class="selectionLabel" for="spec1Q">Spec 1</label>
+							<input id="spec2Q" type="radio" name="pvpSpec" value="spec2" disabled /><label class="selectionLabel" for="spec2Q">Spec 2</label>
+							<input id="spec3Q" type="radio" name="pvpSpec" value="spec3" disabled /><label class="selectionLabel" for="spec3Q">Spec 3</label>
+							<input id="spec4Q" type="radio" name="pvpSpec" value="spec4" disabled hidden /><label class="selectionLabel" for="spec4Q">Spec 4</label>
+
+						</p>
+						<p>
+							<label class="questionInfo">Item Level:</label>
+							<input type="number" name="pvpItemLevel" disabled />
+						</p>		
+
+						<!-- PVP Alts -->
+						<p><label class="questionLabel">Do you have any PVP alts?</label></p>
+						<p><label class="questionInfo">If so please list them below in the format: "Class: Spec (iLevel)"<label></p>
+						<p><textarea name="pvpAltInfo" rows="3" cols="50"></textarea></p>
+					</fieldset>
+
+					<!-- ******************* -->
+					<!-- ARENA QUESTIONS -->
+					<!-- ******************* -->
+					<fieldset id="arenaQuestions" class="subfieldset">
+						<legend>Arena Questions</legend>
+						
+						<!-- Brackets interested in -->
+						<p>
+							<label class="questionLabel">Brackets you're intested in:</label>
+							<input type="checkbox" name="arenaBrackets" value="twos"><label class="selectionLabel" />2v2</label>
+							<input type="checkbox" name="arenaBrackets" value="threes"><label class="selectionLabel" />3v3</label>
+							<input type="checkbox" name="arenaBrackets" value="fives"><label class="selectionLabel" />5v5</label>
+						</p>
+						
+						<!-- Highest ratings --> 
+						<p><label class="questionInfo">What's the highest rating you've obtained in each?</label></p>
+						<p><label>2v2:</label><input type="text" name="twosRating" /></p>
+						<p><label>3v3:</label><input type="text" name="threesRating" /></p>
+						<p><label>5v5:</label><input type="text" name="fivesRating" /></p>
+					</fieldset>
+					
+					<!-- ************* -->
+					<!-- RBG QUESTIONS -->
+					<!-- ************* -->
+					<fieldset id="rbgQuestions" class="subfieldset">
+						<legend>Rated Battleground Questions</legend>
+						
+						<!-- Flag carrier? -->
+						<p>
+							<label class="questionLabel">Flag Carrier?</label>
+							<input type="checkbox" name="flagCarrier" value="yes" />
+						</p>
+						
+						<!-- Highest rating --> 
+						<p> 
+							<label class="questionLabel">Highest RBG rating:</label>
+							<input type="number" name="rbgRating" />
+						</p>
+						
+						<br />
+						
+						<!-- RBG Scheduling --> 
+						<label class="questionLabel"><b>Can you make our RBG times? (All in EST)</b></label>
+						<p>
+							<label class="questionInfo">Core Team:</label>
+							<input type="checkbox" name="rbgTimes" value="saturday" /><label class="selectionLabel">Saturday 9-11pm</label>
+							<input type="checkbox" name="rbgTimes" value="sunday" /><label class="selectionLabel">Sunday 9-11pm</label>
+						</p>		
+					</fieldset>
+					
+					<!-- ***************** -->
+					<!-- OFFICER QUESTIONS -->
+					<!-- ***************** -->
+					<fieldset id="officerQuestions" class="subfieldset">
+						<legend>Officer Questions</legend>
+						 
+						<!-- Officer Experience -->
+						<!-- Roles interested in --> 
+						<!-- Availability --> 
+						<!-- What would make them a good officer? --> 
+					</fieldset>
+				</fieldset> 
+				
+				<!-- ****************** -->
+				<!-- PERSONAL QUESTIONS -->
+				<!-- ****************** -->	
+				<fieldset id="personalQuestions">
+				
+					<legend>Personal Questions</legend>
+					
+					<p><i>
+						<b>OPTIONAL:</b> 
+						Please note that this section is optional. 
+						South of Heaven is a small, tight-knit, mature group of players that are basically family. 
+						If you are interested in joining that family as well as the guild we would like to know a little bit more about you. 
+						But in no way should you feel forced to answer these personal questions.
+					</i></p>
+					
+					<br />
+					
+					<p>Here, I'll go first to break the ice:</p>
+					<p><i>
+						My name is Brenton and I am the guild master for South of Heaven. 
+						I am 22 years old, male and I am Canadian. 
+						I currently reside in Waterloo, Ontario. 
+						I've been playing WoW since late Vanilla and raiding since mid BC. 
+						I have been a raider with SoH since early Wrath, the raid leader since Cata and guild master since Mists.
+						I enjoy and participate in almost all aspects of WoW. 
+						Outside of WoW I enjoy many other games including LoL, Diablo, Hearthstone and single-player RPG games, my favourite game series being the Zelda series followed closely by Final Fantasy and Mario. 
+						Outside of gaming I am an avid reader (especially enjoy fantasy novels), watch lots TV shows and movies, am a more-than-decent skier and enjoy canoe camping.
+					</i></p> 
+					
+					<br />
+					
+					<!-- Real Name -->
+					<p>
+						<label class="questionLabel">RL Name (or nickname):</label>	
+						<input type="text" name="realName" />
+					</p>
+					
+					<!-- Age -->
+					<p>
+						<label class="questionLabel">Age:</label>
+						<input type="number" name="age" /> 
+					</p>
+					
+					<!-- Gender -->
+					<p>
+						<label class="questionLabel">Gender:</label>
+						<input type="radio" name="gender" value="male" /><label class="selectionLabel">Male</label>
+						<input type="radio" name="gender" value="female" /><label class="selectionLabel">Female</label>
+						<input type="radio" name="gender" value="none" checked /><label class="selectionLabel">Prefer not to specify.</label>
+					</p>
+					
+					<!-- Location -->
+					<p>
+						<label class="questionLabel">Where do you live?</label>
+						<input type="text" name="location" />
+					</p>
+					
+					<!-- Other games? -->
+					<p><label class="questionLabel">Do you play any other games aside from WoW?</label></p>
+					<p><textarea name="otherGames" rows="3" cols="80"></textarea></p>
+					
+					<!-- Hobbies -->
+					<p><label class="questionLabel">Do you have any hobbies you'd like to share aside from gaming?</label></p>
+					<p><textarea name="hobbies" rows="3" cols="80"></textarea></p>	
+
+					<!-- Accomplishment -->					
+					<p><label class="questionLabel">What is your proudest accomplishment to date? In game and/or IRL.</label></p>
+					<p><textarea name="accomplishment" rows="3" cols="80"></textarea></p>
+					
+					<!-- Misc info -->					
+					<p><label class="questionLabel">Is there any other interesting information about yourself you would like to share?</label></p>
+					<p><textarea name="miscInfo" rows="3" cols="80"></textarea></p>
+				</fieldset>
+				
+				<!-- *********************** -->
+				<!-- MISCELLANEOUS QUESTIONS -->
+				<!-- *********************** -->
+				<fieldset id="miscQuestions">
+					<legend>Miscellaneous Questions</legend>
+					
+					<p><i><b>REQUIRED:</b> Yes, these questions are required. I know they may seem a little odd. Just answer them however you see fit.</i></p>
+				
+					<br />
+					
+					<!-- Color --> 
+					<p>
+						<label class="questionLabel">What colour* defines you?</label>
+						<input type="text" name="colour" />
+					</p>
+					
+					<!-- Thoughts -->
+					<p><label class="questionLabel">You're laying in bed and can't sleep. What are you thinking about?</label></p>
+					<p><textarea name="bedtimeThoughts" rows="3" cols="80"></textarea></p>
+					
+					
+					<!-- Weird Question -->
+					<p><label class="questionLabel">What would you do if all electricity were to permanently shut off right after you finish submitting this application?</label></p>
+					<p><textarea name="noElectricityQuestion" rows="3" cols="80"></textarea></p>
+						
+					<br /> 
+					
+					<p></i>*Yes. I am Canadian. Colour is spelled with a "u"!</i></p>
+				</fieldset> 
+				
+				<!-- NEXT -->
+				<input class="nextButton" type="button" value="Next">
+			</form>
+		</div><!--Application Questions-->
+	</div><!--Guild Application-->	
+	
+	<!-- Scripts --> 
+	<script type="text/javascript">
+		/* ----- Pre-initialization ----- */
+		// Uncheck all radio buttons 
+		$("*:radio").each(function (i) {
+			$(this).prop("checked", false);
+		});
+		
+		// Uncheck all checkboxes
+		$("*:checkbox").each(function (i) {
+			$(this).prop("checked", false);
+		});
+		
+		/* ----- Navigation Functions ----- */
+		function getFormNames() {
+			var names = []; 
+			function pushName (name) {
+				if (name && names[names.length-1] != name) names.push(name); 
+			}	
+					
+			// Character Question Names 
+			$('#characterQuestions *').each(function() {
+				pushName(this.name); 
+			});
+					
+			// General Question Names
+			var previousGuild = $('input[name="previousGuild"]:checked').val();
+			$('#generalQuestions *').each(function() {
+				var parentID = $(this).parent().parent().attr('id'); 
+				if ((parentID == "previousGuildInfo" && (typeof previousGuild === "undefined" || previousGuild == "no")) 
+					|| (parentID == "noGuildInfo" && (typeof previousGuild === "undefined" || previousGuild == "yes"))) return; 
+				pushName(this.name);
+			});
+			
+			// Interest Question Names
+			var raid, arena, rbg, officer;
+			$('input[name="applicationInterests"]').each(function() {
+				if (this.value == "raiding") raid = this.checked; 
+				if (this.value == "arena") arena = this.checked;
+				if (this.value == "rbg") rbg = this.checked; 
+				if (this.value == "officer") officer = this.checked; 
+			});
+			$('#interestQuestions *').each(function() {
+				var parentID = $(this).parent().parent().attr('id'); 
+				if ((parentID == "raidingQuestions" && !raid)
+					|| (parentID == "pvpQuestions" && !(arena || rbg))
+					|| (parentID == "arenaQuestions" && !arena) 
+					|| (parentID == "rbgQuestions" && !rbg)
+					|| (parentID == "officerQuestions" && !officer)) return; 
+				pushName(this.name);
+			});
+			
+			// Personal Question Names
+			$('#personalQuestions *').each(function() {
+				pushName(this.name); 
+			});
+			
+			// Miscellaneous Question Names
+			$('#miscQuestions *').each(function() {
+				pushName(this.name); 
+			});
+			
+			// Return 
+			return names; 
+		}
+		
+		function generateSubjectLine() {
+			
+		}
+		
+		function generateBodyText() {
+			var bodyText = ""; 
+			var names = getFormNames(); 			
+			$.each(names, function (i, name) {
+				bodyText += name + ": "; 
+				$('*[name="' + name + '"]').each(function (j, element) {
+					if ((element.type == "checkbox" || element.type == "radio") && !(element.checked)) return;  
+					bodyText += element.value + " "; 
+				}); 
+				bodyText += "\n"; 
+			});
+			return bodyText; 
+		}
+		
+		function submitGuildApplication() {
+			var applicationSubjectText = generateSubjectLine(); 
+			var applicationSummaryText = generateBodyText(); 
+		}
+		
+		function toggleFieldset(fs) {
+			if (fs.parent().children().length == 2) {
+				fs.parent().find("div").toggle();
+			} else {
+				fs.parent().wrapInner("<div>");
+				fs.appendTo(fs.parent().parent());
+				fs.parent().find("div").toggle();
+			}
+		}
+		
+		$("fieldset legend").click(function() {
+			toggleFieldset($(this));
+		});
+		
+		$("fieldset legend").each(function (i) {
+			if (i > 0) {
+				$(this).parent().hide();
+			}
+		});
+			
+		$(".nextButton").click(function() {
+			if (this.value == "Submit") {
+				var lastFieldset = $("fieldset").last(); 
+				if (lastFieldset.children().length != 2) {
+					toggleFieldset(lastFieldset.children("legend:first"));
+					submitGuildApplication();
+				}
+			} else {				
+				$("fieldset").each(function (i) {
+					if (!($(this).hasClass("subfieldset"))) {
+						if ($(this).is(":hidden")) {
+							$(this).show(); 
+							if (i == $("fieldset").size()-1) {
+								$(".nextButton").val("Submit");
+							}
+							return false;
+						} else if ($(this).children().length != 2) {
+							toggleFieldset($(this).children("legend:first"));
+						}
+					}
+				});
+			}
+		});
+		
+		/* ----- Character Questions ----- */
+		// Set raid and pvp class upon class choice if not already set individually 
+		$('select[name="characterClass"]').change(function() {
+			if ($('select[name="raidClass"]').val() == null) {
+				$('select[name="raidClass"]').val(this.value);
+				setRaidRoleOptions(this.value);
+			}
+			if ($('select[name="pvpClass"]').val() == null) {
+				$('select[name="pvpClass"]').val(this.value);
+				setPVPSpecOptions(this.value);
+			}
+		});
+		
+		// No default class selected
+		$('select[name="characterClass"]').prop('selectedIndex', -1)
+	
+		/* ----- General Questions ----- */
+		// Set heardAbout extras visibility on select
+		$('select[name="heardAbout"]').change(function() {
+			if (this.value == "guildie") {
+				$("#heardAboutInfoLabel").text("Who?"); 
+				$("#heardAboutExtra").show(); 
+			} else if (this.value == "web") {
+				$("#heardAboutInfoLabel").text("Which website?"); 
+				$("#heardAboutExtra").show(); 
+			} else if (this.value == "other") {
+				$("#heardAboutInfoLabel").text("Please explain."); 
+				$("#heardAboutExtra").show(); 
+			} else {
+				$("#heardAboutExtra").hide(); 
+			}
+		});
+		
+		// Hide heardAbout extras at start
+		$('select[name="heardAbout"]').prop('selectedIndex', -1)
+		$("#heardAboutExtra").hide(); 
+		
+		// Set guild extra info on select previous guild 
+		$("input[name=previousGuild]:radio").change(function () {
+			if (this.value == "yes") {
+				$('#previousGuildInfo').show();
+				$('#noGuildInfo').hide();
+			} else {
+				$('#previousGuildInfo').hide();
+				$('#noGuildInfo').show();
+			}
+		});
+		
+		// Hide guild extra info at start
+		$('#previousGuildInfo').hide();
+		$('#noGuildInfo').hide();
+	
+		/* ----- Interest Section ----- */
+		var raiding, arena, rbg, officer = false;
+		
+		// Display sections applicant is interested in applying for 
+		function setInterestVisibility () {
+			if (raiding) {
+				$("#raidingQuestions").show(); 
+			} else {
+				$("#raidingQuestions").hide();
+			}				
+			
+			if (arena || rbg) {
+				$("#pvpQuestions").show(); 
+			} else {
+				$("#pvpQuestions").hide();
+			}				
+			
+			if (arena) {
+				$("#arenaQuestions").show(); 
+			} else {
+				$("#arenaQuestions").hide();
+			}				
+			
+			if (rbg) {
+				$("#rbgQuestions").show(); 
+			} else {
+				$("#rbgQuestions").hide();
+			}		
+
+			if (officer) {
+				$("#officerQuestions").show(); 
+			} else {
+				$("#officerQuestions").hide();
+			}	
+		};
+		
+		// Initially hide all interest sections 
+		setInterestVisibility(); 
+		$('input[name="applicationInterests"]:checkbox').change(function() {
+			if (this.value == "raiding") raiding = this.checked; 
+			if (this.value == "arena") arena = this.checked; 
+			if (this.value == "rbg") rbg = this.checked; 
+			if (this.value == "officer") officer = this.checked; 
+			setInterestVisibility(); 
+		});
+		
+		/* ----- Raiding Questions ----- */
+		var tank, healer, ranged, melee = false; 
+		
+		// Hide all off options
+		function hideOffOptions() {
+			$('#tankOffQ').prop('checked', false);
+			$('#tankOffQ').prop('disabled', true);
+			$("label[for='tankOffQ']").css("color","darkgray");
+			
+			$('#healerOffQ').prop('checked', false);
+			$('#healerOffQ').prop('disabled', true);
+			$("label[for='healerOffQ']").css("color","darkgray");
+			
+			$('#rangedOffQ').prop('checked', false);
+			$('#rangedOffQ').prop('disabled', true);
+			$("label[for='rangedOffQ']").css("color","darkgray");
+			
+			$('#meleeOffQ').prop('checked', false);
+			$('#meleeOffQ').prop('disabled', true);
+			$("label[for='meleeOffQ']").css("color","darkgray");
+		}
+		
+		// Set off options
+		function displayOffOptions (selectedRole) {
+			var tankOff = (selectedRole == "Tank" ? true : !tank); 
+			$('#tankOffQ').prop('checked', selectedRole == "Tank");
+			$('#tankOffQ').prop('disabled', tankOff);
+			$("label[for='tankOffQ']").css("color",(!tankOff ? "black" : "darkgray"));
+
+			var healerOff = (selectedRole == "Healer" ? true : !healer);
+			$('#healerOffQ').prop('checked', selectedRole == "Healer");
+			$('#healerOffQ').prop('disabled', healerOff);
+			$("label[for='healerOffQ']").css("color",(!healerOff ? "black" : "darkgray"));
+			
+			var rangedOff = (selectedRole == "Ranged" ? true : !ranged);
+			$('#rangedOffQ').prop('checked', selectedRole == "Ranged");
+			$('#rangedOffQ').prop('disabled', rangedOff);
+			$("label[for='rangedOffQ']").css("color",(!rangedOff ? "black" : "darkgray"));
+			
+			var meleeOff = (selectedRole == "Melee" ? true : !melee);
+			$('#meleeOffQ').prop('checked', selectedRole == "Melee");
+			$('#meleeOffQ').prop('disabled', meleeOff);			
+			$("label[for='meleeOffQ']").css("color",(!meleeOff ? "black" : "darkgray"));			
+		}
+		
+		// Set off options upon role choice 
+		$("input[name=raidRole]:radio").change(function () {
+			$('input[name="roleItemLevel"]').prop('disabled', false);
+			displayOffOptions(this.value); 
+		});
+	
+		// Display role options 
+		function displayRoleOptions () {
+			$("input[name=raidRole]:radio").each(function (i, button) {
+				button.checked = false; 
+			});
+			$("input[name=raidOffRole]:checkbox").each(function (i, box) {
+				box.checked = false;
+				box.disabled = true; 
+			});
+			
+			$('#tankRoleQ').prop('disabled', !tank);
+			$("label[for='tankRoleQ']").css("color",(tank ? "black" : "darkgray"));
+			
+			$('#healerRoleQ').prop('disabled', !healer);
+			$("label[for='healerRoleQ']").css("color",(healer ? "black" : "darkgray"));
+			
+			$('#rangedRoleQ').prop('disabled', !ranged);
+			$("label[for='rangedRoleQ']").css("color",(ranged ? "black" : "darkgray"));
+			
+			$('#meleeRoleQ').prop('disabled', !melee);
+			$("label[for='meleeRoleQ']").css("color",(melee ? "black" : "darkgray"));
+		}
+		
+		// Lock iLevel 
+		function lockRaidiLevel() {
+			$('input[name="roleItemLevel"]').prop('disabled', true);
+			$('input[name="roleItemLevel"]').val(""); 
+		}
+		
+		// Set role options 
+		function setRaidRoleOptions(selectedClass) {
+			tank = (selectedClass == "dk" || selectedClass == "warrior" || selectedClass == "paladin" || selectedClass == "monk" || selectedClass == "druid");
+			healer = (selectedClass == "priest" || selectedClass == "shaman" || selectedClass == "paladin" || selectedClass == "monk" || selectedClass == "druid");
+			ranged = (selectedClass == "mage" || selectedClass == "priest" || selectedClass == "warlock" || selectedClass == "shaman" || selectedClass == "druid" || selectedClass == "hunter");
+			melee = (selectedClass == "druid" || selectedClass == "monk" || selectedClass == "rogue" || selectedClass == "shaman" || selectedClass == "dk" || selectedClass == "paladin" || selectedClass == "warrior");
+			displayRoleOptions();
+			lockRaidiLevel(); 
+			hideOffOptions();
+		}
+		
+		// Set role options upon raid class choice 
+		$('select[name="raidClass"]').change(function() {
+			setRaidRoleOptions(this.value); 
+		});
+		
+		// Set class to have no default value 
+		$('select[name="raidClass"]').prop('selectedIndex', -1)
+		displayRoleOptions(); 
+		displayOffOptions();	
+
+		/* ----- PVP Questions ----- */
+		var firstSpec, secondSpec, thirdSpec = ""; 
+		
+		$('input[name="pvpSpec"]:radio').change(function () {
+			$('input[name="pvpItemLevel"]').prop('disabled', false);
+		});
+	
+		// Get specs 
+		function getSpecs(_class) {
+			if (_class == "dk") {
+				return ["Blood", "Frost", "Unholy"];
+			} else if (_class == "druid") {
+				return ["Guardian", "Restoration", "Feral", "Balance"];
+			} else if (_class == "hunter") {
+				return ["Beast Mastery", "Marksmanship", "Survival"];
+			} else if (_class == "mage") {
+				return ["Arcane", "Fire", "Frost"];
+			} else if (_class == "monk") {
+				return ["Brewmaster", "Mistweaver", "Windwalker"];
+			} else if (_class == "paladin") {
+				return ["Protection", "Holy", "Retribution"];
+			} else if (_class == "priest") {
+				return ["Discipline", "Holy", "Shadow"];
+			} else if (_class == "rogue") {
+				return ["Assassination", "Combat", "Subtlety"];
+			} else if (_class == "shaman") {
+				return ["Restoration", "Enhancement", "Elemental"];
+			} else if (_class == "warlock") {
+				return ["Affliction", "Demonology", "Desctruction"];
+			} else if (_class == "warrior") {
+				return ["Protection", "Arms", "Fury"]; 
+			} else {
+				return []; 
+			}
+		}
+	
+		// Set spec options 
+		function setPVPSpecOptions(selectedClass) {
+			if (selectedClass == null) {
+				$("input[name=pvpSpec]:radio").each(function (i) {
+					$(this).prop('disabled', true);
+					$(this).prop('checked', false);
+					$("label[for='" + this.id + "']").css("color","darkgray");				
+				});
+			} else {
+				$("input[name=pvpSpec]:radio").each(function (i) {
+					var specs = getSpecs(selectedClass); 
+					$(this).prop('disabled', false);
+					$(this).prop('checked', false);
+					$("label[for='" + this.id + "']").text(specs[i]);
+					$("label[for='" + this.id + "']").css("color","black	");
+					toggleSpec4(selectedClass == "druid"); 
+				});
+			}
+		}
+		
+		// Toggle 4th spec option
+		function toggleSpec4(show) {			
+			if (show || ((show != false) && ($('#spec4Q').is(":hidden")))) {
+				$('#spec4Q').show(); 
+				$("label[for='spec4Q']").show();
+			} else { 
+				$('#spec4Q').hide(); 
+				$("label[for='spec4Q']").hide();
+			}
+		}
+		
+		// Lock iLevel
+		function lockPVPiLevel() {
+			$('input[name="pvpItemLevel"]').prop('disabled', true);
+			$('input[name="pvpItemLevel"]').val(""); 
+		}
+		
+		// Set role options upon raid class choice 
+		$('select[name="pvpClass"]').change(function() {
+			setPVPSpecOptions(this.value); 
+			lockPVPiLevel();
+		});
+		
+		// Set class to have no default value 
+		$('select[name="pvpClass"]').prop('selectedIndex', -1)
+		toggleSpec4(false); 
+		setPVPSpecOptions(); 
+		
+		/* ----- Arena Questions ----- */
+
+		/* ----- RBG Questions ----- */
+		
+		/* ----- Personal Questions ----- */
+		$("input[name=gender]:radio").each(function() {
+			if (this.value == "none") {
+				$(this).prop("checked", true);
+			}
+		});
+		
+	</script>
+</body>
+</html>
